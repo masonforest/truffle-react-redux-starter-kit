@@ -114,7 +114,8 @@ module.exports = {
           /\.(js|jsx)$/,
           /\.css$/,
           /\.json$/,
-          /\.svg$/
+          /\.svg$/,
+          /\.sol/,
         ],
         loader: 'url-loader',
         options: {
@@ -180,6 +181,10 @@ module.exports = {
         options: {
           name: 'static/media/[name].[hash:8].[ext]'
         }
+      },
+      {
+        test: /\.sol/,
+        loader: 'truffle-solidity',
       }
       // ** STOP ** Are you adding a new loader?
       // Remember to add the new extension(s) to the "url" loader exclusion list.
