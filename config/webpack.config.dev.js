@@ -177,7 +177,14 @@ module.exports = {
       },
       {
         test: /\.sol/,
-        loader: 'truffle-solidity',
+        use: [
+          { loader: 'json-loader' },
+          { loader: 'truffle-solidity-loader',
+            options: {
+              network: 'development'
+            }
+          }
+        ]
       }
       // ** STOP ** Are you adding a new loader?
       // Remember to add the new extension(s) to the "url" loader exclusion list.

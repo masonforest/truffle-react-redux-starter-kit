@@ -1,23 +1,41 @@
-const INCREMENT = 'INCREMENT';
-
+import MetaCoinArtifact from '../../contracts/MetaCoin.sol';
+import Contract from 'truffle-contract';
+import Web3 from 'web3'
+import truffleConfig from '../../truffle.js'
+const SET_BALANCE = 'SET_BALANCE';
+const MetaCoin = Contract(MetaCoinArtifact);
+const provider = new Web3.providers.HttpProvider('http://localhost:8545')
+const web3 = new Web3(provider);
+MetaCoin.setProvider(provider);
 
 export default function reducer(state = { balance: 0 }, action = {}) {
   switch (action.type) {
-    case (INCREMENT):
+    case (SET_BALANCE):
       return {
         ...state,
-        balance: state.balance + 1,
+        balance: action.balance,
       }
-
     break;
-    // do reducer stuff
     default: return state;
   }
 }
 
-// Action Creators
 export const actions = {
-  increment: () => {
-    return { type: INCREMENT };
+  setBalance: (balance) => {
+    return {
+      type: SET_BALANCE,
+      balance,
+    };
+  },
+
+  fetchBalance: function(balance) {
+    return (dispatch, getState) => {
+      MetaCoin.deployed().then((metacoin) => {
+        var account = web3.eth.accounts[0];
+        metacoin.getBalance.call(account).then((balance) => {
+          dispatch(this.setBalance(balance.toString()))
+        })
+      })
+    }
   }
 }
