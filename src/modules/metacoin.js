@@ -1,12 +1,5 @@
-import MetaCoinArtifact from '../../contracts/MetaCoin.sol';
-import Contract from 'truffle-contract';
-import Web3 from 'web3'
-import truffleConfig from '../../truffle.js'
 const SET_BALANCE = 'SET_BALANCE';
-const MetaCoin = Contract(MetaCoinArtifact);
-const provider = new Web3.providers.HttpProvider('http://localhost:8545')
-const web3 = new Web3(provider);
-MetaCoin.setProvider(provider);
+import MetaCoin from "../metacoin";
 
 export default function reducer(state = { balance: 0 }, action = {}) {
   switch (action.type) {
@@ -28,10 +21,9 @@ export const actions = {
     };
   },
 
-  fetchBalance: function(balance) {
+  fetchBalance: function(account) {
     return (dispatch, getState) => {
-      MetaCoin.deployed().then((metacoin) => {
-        var account = web3.eth.accounts[0];
+      MetaCoin.then((metacoin) => {
         metacoin.getBalance.call(account).then((balance) => {
           dispatch(this.setBalance(balance.toString()))
         })
