@@ -6,7 +6,8 @@ import { connect } from 'react-redux';
 
 function mapStateToProps(state, props) {
   return {
-    balance: state.metacoin.balance
+    balance: state.metacoin.balance,
+    transactions: state.metacoin.transactions
   };
 }
 function mapDispatchToProps(dispatch) {

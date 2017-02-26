@@ -4,7 +4,6 @@ import truffleConfig from '../truffle.js'
 var provider;
 
 if (typeof window.web3 !== 'undefined') {
-  // eslint-disable-next-line
   provider = window.web3.currentProvider;
 } else {
   provider = new Web3.providers.HttpProvider(`http://${truffleConfig.networks.development.host}:${truffleConfig.networks.development.port}`)
