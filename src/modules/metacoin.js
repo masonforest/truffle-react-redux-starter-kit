@@ -13,13 +13,11 @@ export default function reducer(state = {
         ...state,
         balance: action.balance,
       }
-    break;
     case (RECEIVE_TRANSACTION):
       return {
         ...state,
         transactions: [...state.transactions, action.transaction],
       }
-    break;
     default: return state;
   }
 }
@@ -49,7 +47,7 @@ export const actions = {
     }
   },
 
-  send: function(amount, address) {
+  send: function(address, amount) {
     return (dispatch, getState) => {
       MetaCoin.then((metacoin) => {
         metacoin.sendCoin(

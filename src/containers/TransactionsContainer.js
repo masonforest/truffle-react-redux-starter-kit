@@ -1,5 +1,4 @@
 import Transactions from "../components/Transactions.js"
-import { actions } from '../modules/metacoin.js';
 import { connect } from 'react-redux';
 
 function mapStateToProps(state, props) {

@@ -5,11 +5,11 @@ class Transactions extends Component {
     const {
       transactions
     } = this.props;
-    console.log(transactions)
     return (
       <div>
       <h1>Transactions</h1>
       <table>
+      <tbody>
       <tr>
         <th>From</th>
         <th>To</th>
@@ -22,6 +22,7 @@ class Transactions extends Component {
           <td>{transaction._value.toString()}</td>
           </tr>
           )}
+      </tbody>
       </table>
       </div>
     );

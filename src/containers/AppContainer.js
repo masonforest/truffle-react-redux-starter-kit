@@ -11,6 +11,10 @@ function mapStateToProps(state, props) {
   };
 }
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators(actions, dispatch)
+  return {
+    onSubmit: ({receiver, amount}) =>
+      dispatch(actions.send(receiver, amount)),
+    ...bindActionCreators(actions, dispatch)
+  }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(App);
