@@ -6,6 +6,7 @@ import web3 from "./web3";
 import { Provider } from 'react-redux';
 import { actions as metaCoinActions } from './modules/metacoin.js';
 import Metacoin from "./metacoin";
+import { Router, Route, browserHistory } from 'react-router'
 import './index.css';
 const store = Store();
 Metacoin.then((metacoin) =>
@@ -22,7 +23,9 @@ store.dispatch(metaCoinActions.fetchBalance(web3.eth.accounts[0]));
 window.addEventListener('load', function() {
   ReactDOM.render(
     <Provider store={store}>
-      <AppContainer />
+      <Router history={browserHistory}>
+        <Route path="/" component={AppContainer} />
+      </Router>
     </Provider>,
     document.getElementById('root')
   );
